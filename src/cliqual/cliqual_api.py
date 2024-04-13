@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as etree
+import os
 
-XML_PATH = "../data/XML_2020_07_07/{filename}.xml"
+XML_PATH = os.path.dirname(__file__) + "/data/XML_2020_07_07/{filename}.xml"
 
 
 class CliqualAPI:
@@ -35,25 +36,30 @@ class CliqualAPI:
 
     def _load_alim(self):
         file_path = XML_PATH.format(filename = "alim")
+        print("...loading xml at " + file_path)
         alim = etree.parse(file_path)
         self._ALIM = alim
 
     def _load_alim_grp(self):
         file_path = XML_PATH.format(filename = "alim_grp")
+        print("...loading xml at " + file_path)
         alim_grp = etree.parse(file_path)
         self._ALIM_GRP = alim_grp
 
     def _load_compo(self):
         file_path = XML_PATH.format(filename = "compo")
+        print("...loading xml at " + file_path)
         compo = etree.parse(file_path)
         self._COMPO = compo
 
     def _load_const(self):
         file_path = XML_PATH.format(filename = "const")
+        print("...loading xml at " + file_path)
         const = etree.parse(file_path)
         self._CONST = const
 
     def _load_sources(self):
         file_path = XML_PATH.format(filename = "sources")
+        print("...loading xml at " + file_path)
         sources = etree.parse(file_path)
         self._SOURCES = sources
