@@ -18,11 +18,24 @@ class TestSourcesAPI(unittest.TestCase):
         src = self.API.get_source("13")
         self.assertEqual(src, " Calculs Ciqual (2007). ")
 
-    def test_get_invalide_sources(self):
+    def test_get_invalid_sources(self):
         src = self.API.get_source(" 4 ")
         self.assertIsNone(src)
 
+class TestConstAPI(unittest.TestCase):
+    API = CliqualAPI()
 
+    def test_get_const_with_int(self):
+        src = self.API.get_const(400)
+        self.assertEqual(src," Eau (g/100 g) ")
+
+    def test_get_const_with_str(self):
+        src = self.API.get_const("60000")
+        self.assertEqual(src," Alcool (g/100 g) ")
+
+    def test_get_invalid_const(self):
+        src = self.API.get_const(" 56600 ")
+        self.assertIsNone(src)
 
 if __name__ == "__main__":
     unittest.main()

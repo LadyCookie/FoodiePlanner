@@ -82,6 +82,17 @@ class CliqualAPI:
     # CONST #
     #-------#
 
+    # Return a string for the const (element, energy...) with code
+    # code should be an integer or a string without spaces
+    def get_const(self, const_code):
+        print(("Querying consts for const {code}").format(code=const_code))
+        prequery = './/CONST[const_code=" {code} "]/const_nom_fr'
+        query = prequery.format(code=const_code)
+        const = self._CONST.find(query)
+        result = None if const is None else const.text
+        print(("Found : {result}").format(result=result))
+        return result
+
     #---------#
     # SOURCES #
     #---------#
