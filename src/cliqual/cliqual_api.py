@@ -22,6 +22,7 @@ class CliqualAPI:
 
     def __init__(self):
         self._load_all_xml()
+        print("...XML loaded.")
 
     #--------------#
     # DATA LOADERS #
@@ -63,3 +64,35 @@ class CliqualAPI:
         print("...loading xml at " + file_path)
         sources = etree.parse(file_path)
         self._SOURCES = sources
+
+    #------#
+    # ALIM #
+    #------#
+
+
+    #----------#
+    # ALIM_GRP #
+    #----------#
+
+    #-------#
+    # COMPO #
+    #-------#
+
+    #-------#
+    # CONST #
+    #-------#
+
+    #---------#
+    # SOURCES #
+    #---------#
+
+    # Return a string for the source (paper, study...) with code
+    # code should be an integer or a string without spaces
+    def get_source(self, source_code):
+        print(("Querying sources for source {code}").format(code=source_code))
+        prequery = './/SOURCES[source_code=" {code} "]/ref_citation'
+        query = prequery.format(code=source_code)
+        source = self._SOURCES.find(query)
+        result = None if source is None else source.text
+        print(("Found : {result}").format(result=result))
+        return result
