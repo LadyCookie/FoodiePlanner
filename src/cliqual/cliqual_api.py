@@ -12,6 +12,12 @@ class Aliment:
         self.subsubgroup = subsubgroup
         self.composition = composition
 
+class Group:
+    def __init__(self, group, subgroup, subsubgroup):
+        self.group = group
+        self.subgroup = subgroup
+        self.subsubgroup = subsubgroup
+
 class Composition:
     def __init__(self, element, content, trust_code, source, min, max):
         self.element = element
@@ -109,6 +115,21 @@ class CliqualAPI:
     # ALIM_GRP #
     #----------#
 
+    # Return a Group from given code
+    def get_group(self, group_code, subgroup_code = 0, subsubgroup_code = 0):   
+        print(("Querying group with codes {code1}/{code2}/{code3}").format(code1=group_code, code2=subgroup_code, code3=subsubgroup_code))
+        prequery = './/ALIM_GRP[alim_grp_code="{grp_code}"][alim_ssgrp_code="{subgrp_code}"][alim_ssssgrp_code="{subsubgrp_code}"]'
+        query = prequery.format(grp_code = self.format_code(group_code), subgrp_code = self.format_code(subgroup_code), subsubgrp_code = self.format_code(subsubgroup_code))
+        print(query)
+        grp = self._ALIM_GRP.find(query)
+
+        group = grp.find('alim_grp_nom_fr').text
+        subgroup = grp.find('alim_ssgrp_nom_fr').text
+        subsubgroup = grp.find('alim_ssssgrp_nom_fr').text
+
+        result = Group(group, subgroup, subsubgroup)
+        return result
+    
     #-------#
     # COMPO #
     #-------#
@@ -134,7 +155,7 @@ class CliqualAPI:
             max = component.find('max').text
 
             comp = Composition(element, content, trust_code, source, min, max)
-            result[const_code] = comp
+            result[element] = comp
             print(("Added {component} to alim composition").format(component=element))
         return result
 

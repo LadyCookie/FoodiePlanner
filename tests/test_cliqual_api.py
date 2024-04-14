@@ -44,6 +44,15 @@ class TestCompoAPI(unittest.TestCase):
         compo = self.API.get_compo(1000)
         self.assertEqual(len(compo),67)
 
+class TestGroupAPI(unittest.TestCase):
+    API = CliqualAPI(load_everything = False, load_alim_grp = True)
+
+    def test_get_grp_with_group(self):
+        grp = self.API.get_group(4,410,41003)
+        print(grp.group)
+        self.assertEqual(grp.group, ' viandes, oeufs, poissons et assimilés ')
+        self.assertEqual(grp.subgroup, ' oeufs ')
+        self.assertEqual(grp.subsubgroup, ' omelettes et autres ovoproduits ')
 
 
 if __name__ == "__main__":
