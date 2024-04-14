@@ -3,6 +3,23 @@ import os
 
 XML_PATH = os.path.dirname(__file__) + "/data/XML_2020_07_07/{filename}.xml"
 
+class Aliment:
+    def __init__(self, id, name, group, subgroup, subsubgroup, composition):
+        self.id = id
+        self.name = name
+        self.group = group
+        self.subgroup = subgroup
+        self.subsubgroup = subsubgroup
+        self.composition = composition
+
+class Composition:
+    def __init__(self, element, content, trust_code, source, min, max):
+        self.element = element
+        self.content = content
+        self.trust_code = trust_code
+        self.source = source
+        self.min = min
+        self.max = max
 
 class CliqualAPI:
     #------------#
@@ -96,19 +113,44 @@ class CliqualAPI:
     # COMPO #
     #-------#
 
+    # Return a dict of composition given from alim_code
+    def get_compo(self, alim_code):
+        print(("Querying composition of aliment {code}").format(code=alim_code))
+        prequery = './/COMPO[alim_code="{code}"]'
+        query = prequery.format(code=self.format_code(alim_code))
+        components = self._COMPO.findall(query)
+
+        result = {}
+        for component in components:
+            const_code = component.find('const_code').text
+            element = self.get_const(const_code)
+            content = component.find('teneur').text
+
+            source_code = component.find('source_code').text
+            source = self.get_source(source_code)
+            trust_code = component.find('code_confiance').text
+            
+            min = component.find('min').text
+            max = component.find('max').text
+
+            comp = Composition(element, content, trust_code, source, min, max)
+            result[const_code] = comp
+            print(("Added {component} to alim composition").format(component=element))
+        return result
+
     #-------#
     # CONST #
     #-------#
 
     # Return a string for the const (element, energy...) with code
-    # code should be an integer or a string without spaces
     def get_const(self, const_code):
-        print(("Querying consts for const {code}").format(code=const_code))
-        prequery = './/CONST[const_code=" {code} "]/const_nom_fr'
-        query = prequery.format(code=const_code)
+        if const_code is None:
+            return None
+        print(("Querying consts for const '{code}'").format(code=const_code))
+        prequery = './/CONST[const_code="{code}"]/const_nom_fr'
+        query = prequery.format(code=self.format_code(const_code))
         const = self._CONST.find(query)
         result = None if const is None else const.text
-        print(("Found : {result}").format(result=result))
         return result
 
     #---------#
@@ -116,12 +158,25 @@ class CliqualAPI:
     #---------#
 
     # Return a string for the source (paper, study...) with code
-    # code should be an integer or a string without spaces
     def get_source(self, source_code):
-        print(("Querying sources for source {code}").format(code=source_code))
-        prequery = './/SOURCES[source_code=" {code} "]/ref_citation'
-        query = prequery.format(code=source_code)
+        if source_code is None:
+            return None
+        print(("Querying sources for source '{code}'").format(code=source_code))
+        prequery = './/SOURCES[source_code="{code}"]/ref_citation'
+        query = prequery.format(code=self.format_code(source_code))
         source = self._SOURCES.find(query)
         result = None if source is None else source.text
-        print(("Found : {result}").format(result=result))
+        return result
+
+    #--------------#
+    # MISCELLANOUS #
+    #--------------#
+
+    # Format an integer or str code to be used within queries
+    def format_code(self, code):
+        if code is None:
+            return None
+        integer_code = int(code)
+        str_code = str(integer_code)
+        result = " " + str_code + " "
         return result
