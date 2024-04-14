@@ -16,13 +16,31 @@ class CliqualAPI:
     _SOURCES = None
 
 
-    #-------------#
-    # INITIALISER #
-    #-------------#
+    #--------------#
+    # INITIALISERS #
+    #--------------#
 
-    def __init__(self):
-        self._load_all_xml()
-        print("...XML loaded.")
+    def __init__(self,
+                 load_everything = True,
+                 load_alim = False,
+                 load_alim_grp = False,
+                 load_compo = False,
+                 load_const = False,
+                 load_sources = False
+                 ):
+        if(load_everything):
+            self._load_all_xml()
+        else:
+            if(load_alim) : 
+                self._load_alim()
+            if(load_alim_grp):
+                self._load_alim_grp()
+            if(load_compo):
+                self._load_compo()
+            if(load_const):
+                self._load_const()
+            if(load_sources):
+                self._load_sources()
 
     #--------------#
     # DATA LOADERS #

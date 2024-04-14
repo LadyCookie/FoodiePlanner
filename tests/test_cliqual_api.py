@@ -8,7 +8,7 @@ class TestAPILoading(unittest.TestCase):
         self.assertTrue(True)
         
 class TestSourcesAPI(unittest.TestCase):
-    API = CliqualAPI()
+    API = CliqualAPI(load_everything = False, load_sources = True)
 
     def test_get_sources_with_int(self):
         src = self.API.get_source(4)
@@ -23,7 +23,7 @@ class TestSourcesAPI(unittest.TestCase):
         self.assertIsNone(src)
 
 class TestConstAPI(unittest.TestCase):
-    API = CliqualAPI()
+    API = CliqualAPI(load_everything = False, load_const = True)
 
     def test_get_const_with_int(self):
         src = self.API.get_const(400)
