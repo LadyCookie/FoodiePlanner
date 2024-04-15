@@ -1,16 +1,40 @@
 import customtkinter
 
-customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
-customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
+#------------------#
+# GENERAL SETTINGS #
+#------------------#
 
-app = customtkinter.CTk()  # create CTk window like you do with the Tk window
-app.geometry("400x240")
+customtkinter.set_appearance_mode("light")  # Modes: system (default), light, dark
+customtkinter.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
 
-def button_function():
-    print("button pressed")
+#------#
+# ROOT #
+#------#
 
-# Use CTkButton instead of tkinter Button
-button = customtkinter.CTkButton(master=app, text="CTkButton", command=button_function)
-button.place(relx=0.5, rely=0.5, anchor=customtkinter.CENTER)
+root = customtkinter.CTk()  
 
-app.mainloop()
+# Sizing root window
+def resize():
+    root.state('zoomed')
+
+root.after(0,resize)
+
+# Flavour
+root.title("Foodie Planner")
+
+#---------#
+# TABVIEW #
+#---------#
+
+tabview = customtkinter.CTkTabview(master = root)
+tabview.pack(side='bottom', fill='both', expand=True, padx = 20, pady = 20)
+
+tab_1 = tabview.add('Planificateur')
+tab_2 = tabview.add('Livre de recette')
+tab_3 = tabview.add('Carnet de suivi')
+
+#------#
+# MAIN #
+#------#
+
+root.mainloop()
