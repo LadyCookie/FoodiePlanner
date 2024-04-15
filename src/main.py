@@ -1,4 +1,5 @@
 import customtkinter
+from cookbook import cookbook
 
 #------------------#
 # GENERAL SETTINGS #
@@ -51,6 +52,8 @@ tabview.pack(side='bottom', fill='both', expand=True, padx = 20, pady = 20)
 tab_1 = tabview.add(tab_1_name)
 tab_2 = tabview.add(tab_2_name)
 tab_3 = tabview.add(tab_3_name)
+
+cookbook.get_cookbook_widget(tab_2)
 
 def change_tabview_color_scheme(tabview):
     active_tab = tabview.get()
