@@ -4,12 +4,9 @@ import os
 XML_PATH = os.path.dirname(__file__) + "/data/XML_2020_07_07/{filename}.xml"
 
 class Aliment:
-    def __init__(self, id, name, group, subgroup, subsubgroup, composition):
-        self.id = id
+    def __init__(self, name, group, composition):
         self.name = name
         self.group = group
-        self.subgroup = subgroup
-        self.subsubgroup = subsubgroup
         self.composition = composition
 
 class Group:
@@ -109,6 +106,24 @@ class CliqualAPI:
     #------#
     # ALIM #
     #------#
+    def get_aliment(self, alim_code):
+        print(("Querying aliment with code '{code}'").format(code=alim_code))
+        prequery = './/ALIM[alim_code="{code}"]'
+        query = prequery.format(code = self.format_code(alim_code))
+        print(query)
+        alim = self._ALIM.find(query)
+
+        name = alim.find('alim_nom_fr').text
+        group_code = alim.find('alim_grp_code').text
+        subgroup_code = alim.find('alim_ssgrp_code').text
+        subsbugroup_code = alim.find('alim_ssssgrp_code').text
+        group = self.get_group(group_code, subgroup_code, subsbugroup_code)
+        composition = self.get_compo(alim_code)        
+
+        result = Aliment(name, group, composition)
+        return result
+
+
 
 
     #----------#
@@ -117,7 +132,7 @@ class CliqualAPI:
 
     # Return a Group from given code
     def get_group(self, group_code, subgroup_code = 0, subsubgroup_code = 0):   
-        print(("Querying group with codes {code1}/{code2}/{code3}").format(code1=group_code, code2=subgroup_code, code3=subsubgroup_code))
+        print(("Querying group with codes '{code1}/{code2}/{code3}'").format(code1=group_code, code2=subgroup_code, code3=subsubgroup_code))
         prequery = './/ALIM_GRP[alim_grp_code="{grp_code}"][alim_ssgrp_code="{subgrp_code}"][alim_ssssgrp_code="{subsubgrp_code}"]'
         query = prequery.format(grp_code = self.format_code(group_code), subgrp_code = self.format_code(subgroup_code), subsubgrp_code = self.format_code(subsubgroup_code))
         print(query)
@@ -136,7 +151,7 @@ class CliqualAPI:
 
     # Return a dict of composition given from alim_code
     def get_compo(self, alim_code):
-        print(("Querying composition of aliment {code}").format(code=alim_code))
+        print(("Querying composition of aliment '{code}'").format(code=alim_code))
         prequery = './/COMPO[alim_code="{code}"]'
         query = prequery.format(code=self.format_code(alim_code))
         components = self._COMPO.findall(query)
@@ -155,7 +170,7 @@ class CliqualAPI:
             max = component.find('max').text
 
             comp = Composition(element, content, trust_code, source, min, max)
-            result[element] = comp
+            result[const_code] = comp
             print(("Added {component} to alim composition").format(component=element))
         return result
 
