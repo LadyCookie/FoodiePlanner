@@ -22,6 +22,26 @@ def generate_cooking_help():
 #-----#
 # HUD #
 #-----#
+def button_event():
+    print("button pressed")
+
+def create_ingredients_widget(root):
+    ingredients_title_frame = customtkinter.CTkFrame(master = root, fg_color = "transparent")
+    ingredients_title_frame.pack(side = "top", fill = "x", padx = 50, pady = 20)
+
+    ingredients_title = customtkinter.CTkLabel(master = ingredients_title_frame, text = "Ingrédients", font = ("",24) , fg_color="transparent")
+    ingredients_title.pack(side = "left")
+
+    ingredients_frame = customtkinter.CTkFrame(root, fg_color="transparent")
+    ingredients_frame.pack(side = "left", fill = "y", padx = (50,20), pady = 5)
+
+
+    for ingredient in ("ail","pates","amour","supercalifragilispicexpialidocious"):
+        ingredient_frame = customtkinter.CTkFrame(ingredients_frame, fg_color="transparent")
+        ingredient_frame.pack(side = "top", fill = "x")
+        ingredient_label = customtkinter.CTkLabel(master = ingredient_frame, text = ingredient, justify = "left", fg_color="transparent", font = ("",18))
+        ingredient_label.pack(side = "left")
+       
 
 def get_cookbook_widget(root):
     frame = customtkinter.CTkFrame(root)
@@ -60,8 +80,9 @@ def get_cookbook_widget(root):
     time_frame.pack(side = "left", padx = (50,0))
 
     time_text = customtkinter.CTkLabel(master = recipe_info, text="30 min", fg_color="transparent", font = ("",30))
-    time_text.pack(side = "left", padx = 10)
     time_text.pack(side = "left", padx = (20,0))
+
+    create_ingredients_widget(cookbook_left_page)
 
     #entry = customtkinter.CTkEntry(recipe_info, placeholder_text="4")
     #entry.pack(side = "left", padx = (20,0))
