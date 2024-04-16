@@ -48,13 +48,3 @@ def get_cookbook_window_menu(root):
     menu_file.add_command(label = "Sauvegarder recette", command = save_recipe, font = ("", 12))
     menu_file.add_command(label = "Générer aide de cuisine", command = generate_cooking_help, font = ("", 12))
     return menu_file
-
-
-
-
-my_image = customtkinter.CTkImage(light_image=Image.open(DATA_PATH.format(path = 'img/cookbook.png')),
-                                  dark_image=Image.open(DATA_PATH.format(path = 'img/cookbook.png')),
-                                  size=(720, 500))
-
-
-
