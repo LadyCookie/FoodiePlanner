@@ -49,8 +49,22 @@ def get_cookbook_widget(root):
     portion_frame = customtkinter.CTkLabel(master = recipe_info, image=portion_logo, fg_color="transparent", text = '')
     portion_frame.pack(side = "left", padx = (20,0))
 
-    portion_text = customtkinter.CTkLabel(recipe_info, text="4", fg_color="transparent", font = ("",30))
+    portion_text = customtkinter.CTkLabel(master = recipe_info, text="4", fg_color="transparent", font = ("",30))
     portion_text.pack(side = "left", padx = 10)
+    portion_text.pack(side = "left", padx = (20,0))
+
+    time_logo = customtkinter.CTkImage(light_image=Image.open(DATA_PATH.format(path = 'img/hourglass.png')),
+                                  dark_image=Image.open(DATA_PATH.format(path = 'img/hourglass.png')),
+                                  size=(25, 25))
+    time_frame = customtkinter.CTkLabel(master = recipe_info, image = time_logo, fg_color="transparent", text = '')
+    time_frame.pack(side = "left", padx = (50,0))
+
+    time_text = customtkinter.CTkLabel(master = recipe_info, text="30 min", fg_color="transparent", font = ("",30))
+    time_text.pack(side = "left", padx = 10)
+    time_text.pack(side = "left", padx = (20,0))
+
+    #entry = customtkinter.CTkEntry(recipe_info, placeholder_text="4")
+    #entry.pack(side = "left", padx = (20,0))
 
     cookbook_right_page = customtkinter.CTkFrame(cookbook_cover)
     cookbook_right_page.configure(fg_color = 'blanchedalmond')
