@@ -36,8 +36,21 @@ def get_cookbook_widget(root):
     cookbook_left_page.configure(fg_color = 'blanchedalmond')
     cookbook_left_page.pack(fill= "both", side = "left", expand = True, padx = (10,0), pady = 10)
 
-    cookbook_title = customtkinter.CTkLabel(cookbook_left_page, text="Title", font = ("",50), fg_color="transparent")
-    cookbook_title.pack(side = "top", pady = 20)
+    recipe_title = customtkinter.CTkLabel(cookbook_left_page, text="Title", font = ("",50), fg_color="transparent")
+    recipe_title.pack(side = "top", pady = 20)
+
+    recipe_info = customtkinter.CTkFrame(cookbook_left_page)
+    recipe_info.configure(fg_color = "transparent")
+    recipe_info.pack(side = "top", fill = "x", padx = (50,0) , pady = 10)
+
+    portion_logo = customtkinter.CTkImage(light_image=Image.open(DATA_PATH.format(path = 'img/bowl.png')),
+                                  dark_image=Image.open(DATA_PATH.format(path = 'img/bowl.png')),
+                                  size=(20, 20))
+    portion_frame = customtkinter.CTkLabel(master = recipe_info, image=portion_logo, fg_color="transparent", text = '')
+    portion_frame.pack(side = "left", padx = (20,0))
+
+    portion_text = customtkinter.CTkLabel(recipe_info, text="4", fg_color="transparent", font = ("",30))
+    portion_text.pack(side = "left", padx = 10)
 
     cookbook_right_page = customtkinter.CTkFrame(cookbook_cover)
     cookbook_right_page.configure(fg_color = 'blanchedalmond')
