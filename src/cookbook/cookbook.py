@@ -36,6 +36,9 @@ def get_cookbook_widget(root):
     cookbook_left_page.configure(fg_color = 'blanchedalmond')
     cookbook_left_page.pack(fill= "both", side = "left", expand = True, padx = (10,0), pady = 10)
 
+    cookbook_title = customtkinter.CTkLabel(cookbook_left_page, text="Title", font = ("",50), fg_color="transparent")
+    cookbook_title.pack(side = "top", pady = 20)
+
     cookbook_right_page = customtkinter.CTkFrame(cookbook_cover)
     cookbook_right_page.configure(fg_color = 'blanchedalmond')
     cookbook_right_page.pack(fill= "both", side = "right", expand = True, padx = (0,10), pady = 10)
