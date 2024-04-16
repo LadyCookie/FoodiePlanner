@@ -1,3 +1,4 @@
+import tkinter
 import customtkinter
 from cookbook import cookbook
 
@@ -22,6 +23,16 @@ root.after(0,resize)
 
 # Flavour
 root.title("Foodie Planner")
+
+#---------#
+# TOOLBAR #
+#---------#
+
+menu_bar = tkinter.Menu(root)
+menu_cookbook = cookbook.get_cookbook_window_menu(menu_bar)
+menu_bar.add_cascade(label="Recettes", menu = menu_cookbook)
+
+root.config(menu = menu_bar)
 
 #---------#
 # TABVIEW #
@@ -53,7 +64,7 @@ tab_1 = tabview.add(tab_1_name)
 tab_2 = tabview.add(tab_2_name)
 tab_3 = tabview.add(tab_3_name)
 
-cookbook.get_cookbook_widget(tab_2)
+cookbook_widget = cookbook.get_cookbook_widget(tab_2)
 
 def change_tabview_color_scheme(tabview):
     active_tab = tabview.get()
