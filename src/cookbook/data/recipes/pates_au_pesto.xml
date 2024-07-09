@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<TABLE>
+    <INFO>
+        <recipe_name> Pâtes au pesto </recipe_name>
+        <prep_time> 10 </prep_time>
+        <cooking_time> 10 </cooking_time>
+   </INFO>
+   <COMPO>
+        <INGREDIENT>
+            Pâtes, 100g
+        </INGREDIENT>
+        <INGREDIENT>
+            Pesto, 10g
+        </INGREDIENT>
+   </COMPO>
+   <RECIPE>
+        <STEP>
+            Cuire les pâtes
+        </STEP>
+        <STEP>
+            Ajouter le pesto
+        </STEP>
+   </RECIPE>
+</TABLE>
