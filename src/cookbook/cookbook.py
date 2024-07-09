@@ -1,4 +1,7 @@
+from cookbook import cookbook_api
+
 import tkinter
+import tkinter.filedialog as tkFileDialog
 import customtkinter
 from PIL import Image
 
@@ -11,7 +14,13 @@ DATA_PATH = os.path.dirname(__file__) + "/data/{path}"
 #-----------#
 
 def load_recipe():
-    print('loading recipe')
+    recipe_path = DATA_PATH.format(path = "recipes/")
+    recipe_file = tkFileDialog.askopenfilename(initialdir = recipe_path, title = "Sélectionner une recette", filetypes = (("file_type","*.xml"),("all files","*.*")))
+    if(recipe_file != ""):
+        print('loading recipe : ' + recipe_file)
+        recipe = cookbook_api.Recipe(recipe_file)
+    else:
+        print("Pas de recette sélectionnée.")
 
 def save_recipe():
     print('saving recipe')

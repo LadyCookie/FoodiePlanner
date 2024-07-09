@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <TABLE>
     <INFO>
-        <recipe_name> Pâtes au pesto </recipe_name>
+        <name> Pâtes au pesto </name>
         <prep_time> 10 </prep_time>
         <cooking_time> 10 </cooking_time>
    </INFO>
