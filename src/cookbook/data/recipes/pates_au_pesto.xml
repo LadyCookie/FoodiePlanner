@@ -2,8 +2,8 @@
 <TABLE>
     <INFO>
         <name> P&#226;tes au pesto </name>
-        <prep_time> 10 </prep_time>
-        <cooking_time> 10 </cooking_time>
+        <portion> 1 assiette </portion>
+        <cooking_time> 10 minutes </cooking_time>
    </INFO>
    <COMPO>
         <INGREDIENT>

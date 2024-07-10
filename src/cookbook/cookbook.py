@@ -15,7 +15,7 @@ DATA_PATH = os.path.dirname(__file__) + "/data/{path}"
 
 cookbook_widget = None
 title_widget = None
-prep_time_widget = None
+portion_widget = None
 cooking_time_widget = None
 ingredients_widget = None
 steps_widget = None
@@ -94,10 +94,11 @@ def get_cookbook_widget(root):
                                   size=(20, 20))
     portion_frame = customtkinter.CTkLabel(master = recipe_info, image=portion_logo, fg_color="transparent", text = '')
     portion_frame.pack(side = "left", padx = (20,0))
-
     portion_text = customtkinter.CTkLabel(master = recipe_info, text="4", fg_color="transparent", font = ("",30))
     portion_text.pack(side = "left", padx = 10)
     portion_text.pack(side = "left", padx = (20,0))
+    global portion_widget
+    portion_widget = portion_text
 
     time_logo = customtkinter.CTkImage(light_image=Image.open(DATA_PATH.format(path = 'img/hourglass.png')),
                                   dark_image=Image.open(DATA_PATH.format(path = 'img/hourglass.png')),
@@ -105,11 +106,10 @@ def get_cookbook_widget(root):
     
     time_frame = customtkinter.CTkLabel(master = recipe_info, image = time_logo, fg_color="transparent", text = '')
     time_frame.pack(side = "left", padx = (50,0))
-
     time_text = customtkinter.CTkLabel(master = recipe_info, text="30 min", fg_color="transparent", font = ("",30))
     time_text.pack(side = "left", padx = (20,0))
-    global prep_time_widget
-    prep_time_widget = time_text
+    global cooking_time_widget
+    cooking_time_widget = time_text
 
     global ingredients_widget
     ingredients_widget = create_ingredients_widget(cookbook_left_page)
@@ -125,22 +125,24 @@ def update_title(title):
     global title_widget
     title_widget.configure(text = title)
 
-def update_prep_time(time):
-    print("TODO prep time")
+def update_portion(time):
+    global portion_widget
+    portion_widget.configure(text = time)
 
 def update_cooking_time(time):
-    print("TODO")
+    global cooking_time_widget
+    cooking_time_widget.configure(text = time)
 
 def update_ingredients(ingredients):
-    print("TODO")
+    print("Change ingredient list")
 
 def update_steps(steps):
-    print("TODO")
+    print("Change steps list")
 
 def update_recipe(recipe):
     global cookbook_widget
     update_title(recipe._NAME)
-    update_prep_time(recipe._PREP_TIME)
+    update_portion(recipe._PORTION)
     update_cooking_time(recipe._COOKING_TIME)
     update_ingredients(recipe._COMPOSITION)
     update_steps(recipe._RECIPE)

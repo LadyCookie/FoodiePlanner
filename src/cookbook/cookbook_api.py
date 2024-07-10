@@ -5,7 +5,7 @@ class Recipe:
     # ATTRIBUTES #
     #------------#
     _NAME = ""
-    _PREP_TIME = 0
+    _PORTION = 0
     _COOKING_TIME = 0
     _COMPOSITION = []
     _RECIPE = []
@@ -21,11 +21,11 @@ class Recipe:
         name = recipe_tree.find(".//INFO/name")
         self._NAME = "" if name is None else name.text
 
-        prep_time = recipe_tree.find(".//INFO/prep_time")
-        self._PREP_TIME = 0 if prep_time is None else prep_time.text
+        portion = recipe_tree.find(".//INFO/portion")
+        self._PORTION = "0" if portion is None else portion.text
 
         cooking_time = recipe_tree.find(".//INFO/cooking_time")
-        self._COOKING_TIME = 0 if cooking_time is None else cooking_time.text
+        self._COOKING_TIME = "0" if cooking_time is None else cooking_time.text
 
         composition = recipe_tree.findall(".//COMPO/INGREDIENT")
         #self._COMPOSITION = [] if composition is None else composition.text
