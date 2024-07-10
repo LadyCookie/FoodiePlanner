@@ -18,9 +18,16 @@ class Recipe:
         print("...loading xml at " + file_path)
         recipe_tree = etree.parse(file_path)
 
-        self._NAME = recipe_tree.find(".//INFO/name")
-        self._PREP_TIME = recipe_tree.find(".//INFO/prep_time")
-        self._COOKING_TIME = recipe_tree.find(".//INFO/cooking_time")
+        name = recipe_tree.find(".//INFO/name")
+        self._NAME = "" if name is None else name.text
 
-        self._COMPOSITION = recipe_tree.findall(".//COMPO/INGREDIENT")
-        self._RECIPE = recipe_tree.findall(".//RECIPE/STEP")
+        prep_time = recipe_tree.find(".//INFO/prep_time")
+        self._PREP_TIME = 0 if prep_time is None else prep_time.text
+
+        cooking_time = recipe_tree.find(".//INFO/cooking_time")
+        self._COOKING_TIME = 0 if cooking_time is None else cooking_time.text
+
+        composition = recipe_tree.findall(".//COMPO/INGREDIENT")
+        #self._COMPOSITION = [] if composition is None else composition.text
+        recipe = recipe_tree.findall(".//RECIPE/STEP")
+        #self._RECIPE = [] if recipe is None else recipe.text 

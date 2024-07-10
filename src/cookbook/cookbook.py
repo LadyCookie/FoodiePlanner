@@ -9,6 +9,17 @@ import os
 
 DATA_PATH = os.path.dirname(__file__) + "/data/{path}"
 
+#------------------#
+# GLOBAL VARIABLES #
+#------------------#
+
+cookbook_widget = None
+title_widget = None
+prep_time_widget = None
+cooking_time_widget = None
+ingredients_widget = None
+steps_widget = None
+
 #-----------#
 # UTILITIES #
 #-----------#
@@ -19,6 +30,7 @@ def load_recipe():
     if(recipe_file != ""):
         print('loading recipe : ' + recipe_file)
         recipe = cookbook_api.Recipe(recipe_file)
+        update_recipe(recipe)
     else:
         print("Pas de recette sélectionnée.")
 
@@ -50,12 +62,15 @@ def create_ingredients_widget(root):
         ingredient_frame.pack(side = "top", fill = "x")
         ingredient_label = customtkinter.CTkLabel(master = ingredient_frame, text = ingredient, justify = "left", fg_color="transparent", font = ("",18))
         ingredient_label.pack(side = "left")
+    return ingredients_frame
        
 
 def get_cookbook_widget(root):
     frame = customtkinter.CTkFrame(root)
     frame.configure(fg_color = 'lavender')
     frame.pack(fill = "both", expand = True, padx = 10, pady = 10)
+    global cookbook_widget 
+    cookbook_widget = frame
 
     cookbook_cover = customtkinter.CTkFrame(frame)
     cookbook_cover.configure(fg_color = 'plum4')
@@ -67,6 +82,8 @@ def get_cookbook_widget(root):
 
     recipe_title = customtkinter.CTkLabel(cookbook_left_page, text="Title", font = ("",50), fg_color="transparent")
     recipe_title.pack(side = "top", pady = 20)
+    global title_widget
+    title_widget = recipe_title
 
     recipe_info = customtkinter.CTkFrame(cookbook_left_page)
     recipe_info.configure(fg_color = "transparent")
@@ -85,22 +102,48 @@ def get_cookbook_widget(root):
     time_logo = customtkinter.CTkImage(light_image=Image.open(DATA_PATH.format(path = 'img/hourglass.png')),
                                   dark_image=Image.open(DATA_PATH.format(path = 'img/hourglass.png')),
                                   size=(25, 25))
+    
     time_frame = customtkinter.CTkLabel(master = recipe_info, image = time_logo, fg_color="transparent", text = '')
     time_frame.pack(side = "left", padx = (50,0))
 
     time_text = customtkinter.CTkLabel(master = recipe_info, text="30 min", fg_color="transparent", font = ("",30))
     time_text.pack(side = "left", padx = (20,0))
+    global prep_time_widget
+    prep_time_widget = time_text
 
-    create_ingredients_widget(cookbook_left_page)
-
-    #entry = customtkinter.CTkEntry(recipe_info, placeholder_text="4")
-    #entry.pack(side = "left", padx = (20,0))
+    global ingredients_widget
+    ingredients_widget = create_ingredients_widget(cookbook_left_page)
 
     cookbook_right_page = customtkinter.CTkFrame(cookbook_cover)
     cookbook_right_page.configure(fg_color = 'blanchedalmond')
     cookbook_right_page.pack(fill= "both", side = "right", expand = True, padx = (0,10), pady = 10)
 
     return frame
+
+
+def update_title(title):
+    global title_widget
+    title_widget.configure(text = title)
+
+def update_prep_time(time):
+    print("TODO prep time")
+
+def update_cooking_time(time):
+    print("TODO")
+
+def update_ingredients(ingredients):
+    print("TODO")
+
+def update_steps(steps):
+    print("TODO")
+
+def update_recipe(recipe):
+    global cookbook_widget
+    update_title(recipe._NAME)
+    update_prep_time(recipe._PREP_TIME)
+    update_cooking_time(recipe._COOKING_TIME)
+    update_ingredients(recipe._COMPOSITION)
+    update_steps(recipe._RECIPE)
 
 def get_cookbook_window_menu(root):
     menu_file = tkinter.Menu(root, tearoff = 0)
