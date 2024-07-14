@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as etree
+import model
 
 class Recipe:
     #------------#

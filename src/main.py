@@ -1,6 +1,12 @@
 import tkinter
 import customtkinter
 from cookbook import cookbook
+import model
+
+#------------------#
+# GLOBAL VARIABLES #
+#------------------#
+model.Init()
 
 #------------------#
 # GENERAL SETTINGS #
