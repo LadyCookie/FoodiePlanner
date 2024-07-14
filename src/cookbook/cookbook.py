@@ -76,9 +76,12 @@ def get_cookbook_widget(root):
     cookbook_cover.configure(fg_color = 'plum4')
     cookbook_cover.pack(fill = "both", expand = True, padx = 10, pady = 10)
 
-    cookbook_left_page = customtkinter.CTkFrame(cookbook_cover)
+    cookbook_pages = customtkinter.CTkFrame(cookbook_cover)    
+    cookbook_pages.pack(fill="both", expand= True, padx = 10, pady = 10)
+
+    cookbook_left_page = customtkinter.CTkFrame(cookbook_pages)
     cookbook_left_page.configure(fg_color = 'blanchedalmond')
-    cookbook_left_page.pack(fill= "both", side = "left", expand = True, padx = (10,0), pady = 10)
+    cookbook_left_page.grid(row=0,column=0, sticky="nsew", columnspan=1 , rowspan=1)
 
     recipe_title = customtkinter.CTkLabel(cookbook_left_page, text="Title", font = ("",50), fg_color="transparent")
     recipe_title.pack(side = "top", pady = 20)
@@ -114,9 +117,13 @@ def get_cookbook_widget(root):
     global ingredients_widget
     ingredients_widget = create_ingredients_widget(cookbook_left_page)
 
-    cookbook_right_page = customtkinter.CTkFrame(cookbook_cover)
+    cookbook_right_page = customtkinter.CTkFrame(cookbook_pages)
     cookbook_right_page.configure(fg_color = 'blanchedalmond')
-    cookbook_right_page.pack(fill= "both", side = "right", expand = True, padx = (0,10), pady = 10)
+    cookbook_right_page.grid(row=0,column=1, sticky="nsew", columnspan=1 , rowspan=1)
+
+    cookbook_pages.grid_columnconfigure(0, weight=1, uniform="group1")
+    cookbook_pages.grid_columnconfigure(1, weight=1, uniform="group1")
+    cookbook_pages.grid_rowconfigure(0, weight=1)
 
     return frame
 
