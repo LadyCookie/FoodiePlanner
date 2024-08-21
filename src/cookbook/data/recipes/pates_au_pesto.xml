@@ -2,15 +2,49 @@
 <TABLE>
     <INFO>
         <name> P&#226;tes au pesto </name>
-        <portion> 1 assiette </portion>
+        <portion> 2 </portion>
         <cooking_time> 10 minutes </cooking_time>
    </INFO>
    <COMPO>
         <INGREDIENT>
-            P&#226;tes, 100g
+            <NOM> Pâtes </NOM>
+            <CODE> 9810 </CODE>
+            <QUANTITE> 200 </QUANTITE>
         </INGREDIENT>
         <INGREDIENT>
-            Pesto, 10g
+            <NOM> Basilic frais </NOM>
+            <CODE> 11033 </CODE>
+            <QUANTITE> 40 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Haricots coco plats </NOM>
+            <CODE> 20293 </CODE>
+            <QUANTITE> 100 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Huile d'olive </NOM>
+            <CODE> 17270 </CODE>
+            <QUANTITE> 110 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Pignons de pin </NOM>
+            <CODE> 15025 </CODE>
+            <QUANTITE> 50 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Parmesan </NOM>
+            <CODE> 12120 </CODE>
+            <QUANTITE> 50 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Ail </NOM>
+            <CODE> 11000 </CODE>
+            <QUANTITE> 8 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Sel </NOM>
+            <CODE> 11017 </CODE>
+            <QUANTITE> 2 </QUANTITE>
         </INGREDIENT>
    </COMPO>
    <RECIPE>
