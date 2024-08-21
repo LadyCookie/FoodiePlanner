@@ -56,14 +56,29 @@ def create_ingredients_widget(root):
     ingredients_frame = customtkinter.CTkFrame(root, fg_color="transparent")
     ingredients_frame.pack(side = "left", fill = "y", padx = (50,20), pady = 5)
 
-
     for ingredient in ("ail","pates","amour","supercalifragilispicexpialidocious"):
         ingredient_frame = customtkinter.CTkFrame(ingredients_frame, fg_color="transparent")
         ingredient_frame.pack(side = "top", fill = "x")
         ingredient_label = customtkinter.CTkLabel(master = ingredient_frame, text = ingredient, justify = "left", fg_color="transparent", font = ("",18))
         ingredient_label.pack(side = "left")
     return ingredients_frame
-       
+
+def clear_ingredients():   
+    global ingredients_widget
+    for child in ingredients_widget.winfo_children():
+        child.destroy()
+
+def create_ingredients(root, ingredients):
+        for ingredient in ingredients:
+            ingredient_frame = customtkinter.CTkFrame(root, fg_color="transparent")
+            ingredient_frame.pack(side = "top", fill = "x")
+
+            label_text_template = "{quantity}g {ingredient_name}"
+            label_text = label_text_template.format(quantity = ingredient._QUANTITY, ingredient_name = ingredient._NAME)
+
+            ingredient_label = customtkinter.CTkLabel(master = ingredient_frame, text = label_text, justify = "left", fg_color="transparent", font = ("",18))
+            ingredient_label.pack(side = "left")
+      
 
 def get_cookbook_widget(root):
     frame = customtkinter.CTkFrame(root)
@@ -140,8 +155,15 @@ def update_cooking_time(time):
     global cooking_time_widget
     cooking_time_widget.configure(text = time)
 
-def update_ingredients(ingredients):
-    print("Change ingredient list")
+def clear_ingredients():   
+    global ingredients_widget
+    for child in ingredients_widget.winfo_children():
+        child.destroy()
+
+def update_ingredients(ingredients):    
+    clear_ingredients()
+    global ingredients_widget
+    create_ingredients(ingredients_widget,ingredients)
 
 def update_steps(steps):
     print("Change steps list")
