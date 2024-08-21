@@ -1,6 +1,26 @@
 import xml.etree.ElementTree as etree
 import model
 
+class Ingredient:
+    #------------#
+    # ATTRIBUTES #
+    #------------#
+    _NAME = ""
+    _CODE = 0
+    _QUANTITY = 0
+
+    def __init__(self, XML_Ingredient):
+        name = XML_Ingredient.find('NOM')
+        self._NAME = "" if name is None else name.text
+        
+        code = XML_Ingredient.find('CODE')
+        self._CODE = "" if code is None else code.text 
+
+        quantity = XML_Ingredient.find('QUANTITE')
+        self._QUANTITY = "" if quantity is None else quantity.text
+
+
+
 class Recipe:
     #------------#
     # ATTRIBUTES #
@@ -29,6 +49,9 @@ class Recipe:
         self._COOKING_TIME = "0" if cooking_time is None else cooking_time.text
 
         composition = recipe_tree.findall(".//COMPO/INGREDIENT")
-        #self._COMPOSITION = [] if composition is None else composition.text
+        for ingredient in composition:
+            new_ingredient = Ingredient(ingredient)
+            self._COMPOSITION.append(new_ingredient)
+
         recipe = recipe_tree.findall(".//RECIPE/STEP")
         #self._RECIPE = [] if recipe is None else recipe.text 
