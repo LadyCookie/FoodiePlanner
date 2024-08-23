@@ -136,6 +136,10 @@ def get_cookbook_widget(root):
     cookbook_right_page.configure(fg_color = 'blanchedalmond')
     cookbook_right_page.grid(row=0,column=1, sticky="nsew", columnspan=1 , rowspan=1)
 
+    global kcal_widget
+    kcal_widget =customtkinter.CTkLabel(master=cookbook_right_page, text="722 kcal / portion", fg_color="transparent", font=("",30) )
+    kcal_widget.pack(side = "left", padx = (20,0))
+
     cookbook_pages.grid_columnconfigure(0, weight=1, uniform="group1")
     cookbook_pages.grid_columnconfigure(1, weight=1, uniform="group1")
     cookbook_pages.grid_rowconfigure(0, weight=1)
@@ -168,6 +172,12 @@ def update_ingredients(ingredients):
 def update_steps(steps):
     print("Change steps list")
 
+def update_kcal_score(score):
+    global kcal_widget
+    score_text_template = "{score} kcal / portion"
+    score_text = score_text_template.format(score = score)
+    kcal_widget.configure(text = score_text)
+
 def update_recipe(recipe):
     global cookbook_widget
     update_title(recipe._NAME)
@@ -175,6 +185,8 @@ def update_recipe(recipe):
     update_cooking_time(recipe._COOKING_TIME)
     update_ingredients(recipe._COMPOSITION)
     update_steps(recipe._RECIPE)
+    update_kcal_score(recipe._SCORE)
+
 
 def get_cookbook_window_menu(root):
     menu_file = tkinter.Menu(root, tearoff = 0)

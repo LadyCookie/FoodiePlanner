@@ -30,6 +30,7 @@ class Recipe:
     _COOKING_TIME = 0
     _COMPOSITION = []
     _RECIPE = []
+    _SCORE = 0
 
     #--------------#
     # INITIALISERS #
@@ -53,5 +54,10 @@ class Recipe:
             new_ingredient = Ingredient(ingredient)
             self._COMPOSITION.append(new_ingredient)
 
+        self.compute_score()
+
         recipe = recipe_tree.findall(".//RECIPE/STEP")
         #self._RECIPE = [] if recipe is None else recipe.text 
+
+    def compute_score(self):
+        self._SCORE = 100
