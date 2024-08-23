@@ -44,7 +44,8 @@ class Recipe:
         self._NAME = "" if name is None else name.text
 
         portion = recipe_tree.find(".//INFO/portion")
-        self._PORTION = "0" if portion is None else portion.text
+        portion_text = "0" if portion is None else portion.text
+        self._PORTION = int(portion_text)
 
         cooking_time = recipe_tree.find(".//INFO/cooking_time")
         self._COOKING_TIME = "0" if cooking_time is None else cooking_time.text
@@ -64,4 +65,5 @@ class Recipe:
         for ingredient in self._COMPOSITION:
             compo = model.Cliqual_API.get_specific_compo(ingredient._CODE,328)
             total_content += compo.content
-        self._SCORE = total_content
+        self._SCORE = total_content/self._PORTION
+        
