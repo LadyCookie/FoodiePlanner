@@ -1,5 +1,8 @@
 import tkinter
 import customtkinter
+
+import os
+
 from cookbook import cookbook
 import model
 
@@ -39,6 +42,7 @@ menu_cookbook = cookbook.get_cookbook_window_menu(menu_bar)
 menu_bar.add_cascade(label="Recettes", menu = menu_cookbook)
 
 root.config(menu = menu_bar)
+root.iconbitmap(os.path.dirname(__file__) + "\common\logo.ico")
 
 #---------#
 # TABVIEW #
