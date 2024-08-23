@@ -60,4 +60,8 @@ class Recipe:
         #self._RECIPE = [] if recipe is None else recipe.text 
 
     def compute_score(self):
-        self._SCORE = 100
+        total_content = 0
+        for ingredient in self._COMPOSITION:
+            compo = model.Cliqual_API.get_specific_compo(ingredient._CODE,328)
+            total_content += compo.content
+        self._SCORE = total_content
