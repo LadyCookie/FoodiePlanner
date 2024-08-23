@@ -1,6 +1,6 @@
 import unittest
 
-from src.cliqual.cliqual_api import CliqualAPI
+from cliqual.cliqual_api import CliqualAPI
 
 class TestAPILoading(unittest.TestCase):
     def test_initialize_api(self):
@@ -43,6 +43,15 @@ class TestCompoAPI(unittest.TestCase):
     def test_get_compo_with_int(self):
         compo = self.API.get_compo(1000)
         self.assertEqual(len(compo),67)
+
+    def test_get_specific_compo_with_int(self):
+        component = self.API.get_specific_compo(9810,328)
+        self.assertEqual(component.element, " Energie, Règlement UE N° 1169/2011 (kcal/100 g) ")
+        self.assertEqual(component.content, 336.0)
+        self.assertEqual(component.trust_code, " C ")
+        self.assertEqual(component.source, ' Valeur ajustée/calculée/imputée Ciqual ')
+        self.assertEqual(component.min, None)
+        self.assertEqual(component.max, None)
 
 class TestGroupAPI(unittest.TestCase):
     API = CliqualAPI(load_everything = False, load_alim_grp = True)

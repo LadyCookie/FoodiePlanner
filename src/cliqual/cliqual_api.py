@@ -160,7 +160,9 @@ class CliqualAPI:
         for component in components:
             const_code = component.find('const_code').text
             element = self.get_const(const_code)
-            content = component.find('teneur').text
+
+            content_text = component.find('teneur').text
+            content = 0.0 if content_text==' - ' else float(content_text)
 
             source_code = component.find('source_code').text
             source = self.get_source(source_code)
@@ -173,6 +175,30 @@ class CliqualAPI:
             result[const_code] = comp
             print(("Added {component} to alim composition").format(component=element))
         return result
+    
+    # Return the composition with given code for given alim_code
+    def get_specific_compo(self, alim_code, compo_code):
+        print(("Querying composition {compo_code} of aliment '{alim_code}'").format(compo_code=compo_code, alim_code=alim_code))
+        prequery = './/COMPO[alim_code="{alim_code}"][const_code="{const_code}"]'
+        query = prequery.format(alim_code=self.format_code(alim_code), const_code=self.format_code(compo_code))
+        component = self._COMPO.find(query)
+
+        const_code = component.find('const_code').text
+        element = self.get_const(const_code)
+        
+        content_text = component.find('teneur').text
+        content = 0.0 if content_text==' - ' else float(content_text)
+
+        source_code = component.find('source_code').text
+        source = self.get_source(source_code)
+        trust_code = component.find('code_confiance').text
+        
+        min = component.find('min').text
+        max = component.find('max').text
+
+        comp = Composition(element, content, trust_code, source, min, max)
+        return comp
+
 
     #-------#
     # CONST #
