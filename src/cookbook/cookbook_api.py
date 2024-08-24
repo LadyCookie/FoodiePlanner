@@ -2,14 +2,16 @@ import xml.etree.ElementTree as etree
 import model
 
 class Ingredient:
-    #------------#
-    # ATTRIBUTES #
-    #------------#
-    _NAME = ""
-    _CODE = 0
-    _QUANTITY = 0
+    #--------------#
+    # INITIALISERS #
+    #--------------#
 
     def __init__(self, XML_Ingredient):
+
+        self._NAME = ""
+        self._CODE = 0
+        self._QUANTITY = 0
+
         name = XML_Ingredient.find('NOM')
         self._NAME = "" if name is None else name.text
         
@@ -22,21 +24,19 @@ class Ingredient:
 
 
 class Recipe:
-    #------------#
-    # ATTRIBUTES #
-    #------------#
-    _NAME = ""
-    _PORTION = 0
-    _COOKING_TIME = 0
-    _COMPOSITION = []
-    _RECIPE = []
-    _SCORE = 0
-
     #--------------#
     # INITIALISERS #
     #--------------#
 
     def __init__(self, file_path = ""):
+
+        self._NAME = ""
+        self._PORTION = 0
+        self._COOKING_TIME = 0
+        self._COMPOSITION = []
+        self._RECIPE = []
+        self._SCORE = 0
+
         print("...loading xml at " + file_path)
         recipe_tree = etree.parse(file_path)
 

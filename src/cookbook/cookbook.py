@@ -63,14 +63,10 @@ def create_ingredients_widget(root):
         ingredient_label.pack(side = "left")
     return ingredients_frame
 
-def clear_ingredients():   
-    global ingredients_widget
-    for child in ingredients_widget.winfo_children():
-        child.destroy()
-
-def create_ingredients(root, ingredients):
+def create_ingredients(ingredients):
+        global ingredients_widget
         for ingredient in ingredients:
-            ingredient_frame = customtkinter.CTkFrame(root, fg_color="transparent")
+            ingredient_frame = customtkinter.CTkFrame(ingredients_widget, fg_color="transparent")
             ingredient_frame.pack(side = "top", fill = "x")
 
             label_text_template = "{quantity}g {ingredient_name}"
@@ -164,10 +160,9 @@ def clear_ingredients():
     for child in ingredients_widget.winfo_children():
         child.destroy()
 
-def update_ingredients(ingredients):    
+def update_ingredients(ingredients):  
     clear_ingredients()
-    global ingredients_widget
-    create_ingredients(ingredients_widget,ingredients)
+    create_ingredients(ingredients)
 
 def update_steps(steps):
     print("Change steps list")
@@ -179,7 +174,6 @@ def update_kcal_score(score):
     kcal_widget.configure(text = score_text)
 
 def update_recipe(recipe):
-    global cookbook_widget
     update_title(recipe._NAME)
     update_portion(recipe._PORTION)
     update_cooking_time(recipe._COOKING_TIME)
