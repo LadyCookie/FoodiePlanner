@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<TABLE>
+    <INFO>
+        <name> Omelette aux champignons </name>
+        <portion> 2 </portion>
+        <cooking_time> 10 minutes </cooking_time>
+   </INFO>
+   <COMPO>
+        <INGREDIENT>
+            <NOM> Oeufs </NOM>
+            <CODE> 22000 </CODE>
+            <QUANTITE> 220 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Oignon </NOM>
+            <CODE> 20034 </CODE>
+            <QUANTITE> 150 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Ail </NOM>
+            <CODE> 11000 </CODE>
+            <QUANTITE> 8 </QUANTITE>
+        </INGREDIENT>
+        <INGREDIENT>
+            <NOM> Champignons </NOM>
+            <CODE> 20056 </CODE>
+            <QUANTITE> 100 </QUANTITE>
+        </INGREDIENT>
+   </COMPO>
+</TABLE>
