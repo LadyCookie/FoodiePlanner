@@ -2,6 +2,7 @@ import tkinter
 import customtkinter
 
 import os
+from threading import Thread
 
 from cookbook import cookbook
 import model
@@ -9,7 +10,10 @@ import model
 #------------------#
 # GLOBAL VARIABLES #
 #------------------#
-model.Init()
+def load_model():
+    model.Init()
+
+
 
 #------------------#
 # GENERAL SETTINGS #
@@ -17,6 +21,7 @@ model.Init()
 
 customtkinter.set_appearance_mode("light")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
+
 
 #------#
 # ROOT #
@@ -32,6 +37,22 @@ root.after(0,resize)
 
 # Flavour
 root.title("Foodie Planner")
+
+#--------------#
+# SPLASHSCREEN #
+#--------------#
+
+loading_label = customtkinter.CTkLabel(root, text="Loading")
+loading_label.pack()
+
+thread = Thread(target = load_model, daemon = True)
+thread.start()
+
+while thread.is_alive():
+    root.update()
+
+loading_label.destroy()
+
 
 #---------#
 # TOOLBAR #
@@ -121,6 +142,7 @@ tabview.configure(segmented_button_selected_hover_color = tab_1_hover_color)
 tabview.configure(segmented_button_unselected_hover_color = tab_1_hover_color)
 tabview.configure(fg_color = tab_1_bg_color)
 root.config(menu = tab_1_toolbar)
+
 
 #------#
 # MAIN #
