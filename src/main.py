@@ -108,10 +108,13 @@ def change_tabview_toolbar(toolbar):
     if(active_tab == tab_3_name):
         root.config(menu = tab_3_toolbar)
 
+def update_tab_view(view):
+    change_tabview_color_scheme(tabview)
+    change_tabview_toolbar(tabview)
 
 
-tabview.configure(command = lambda: change_tabview_color_scheme(tabview))
-tabview.configure(command = lambda: change_tabview_toolbar(tabview))
+
+tabview.configure(command = lambda: update_tab_view(tabview))
 
 tabview.configure(segmented_button_selected_color = tab_1_color)
 tabview.configure(segmented_button_selected_hover_color = tab_1_hover_color)
