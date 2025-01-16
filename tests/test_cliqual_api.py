@@ -1,6 +1,6 @@
 import unittest
 
-from cliqual.cliqual_api import CliqualAPI
+from src.cliqual.cliqual_api import CliqualAPI
 
 class TestAPILoading(unittest.TestCase):
     def test_initialize_api(self):
