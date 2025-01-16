@@ -51,15 +51,15 @@ class CliqualAPI:
         if(load_everything):
             self._load_all_xml()
         else:
-            if(load_alim & self._ALIM is None) : 
+            if(load_alim and self._ALIM is None) : 
                 self._load_alim()
-            if(load_alim_grp & self._ALIM_GRP is None):
+            if(load_alim_grp and self._ALIM_GRP is None):
                 self._load_alim_grp()
-            if(load_compo & self._COMPO is None):
+            if(load_compo and self._COMPO is None):
                 self._load_compo()
-            if(load_const & self._CONST is None):
+            if(load_const and self._CONST is None):
                 self._load_const()
-            if(load_sources & self._SOURCES is None):
+            if(load_sources and self._SOURCES is None):
                 self._load_sources()
 
     #--------------#
